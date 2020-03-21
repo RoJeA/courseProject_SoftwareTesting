@@ -23,17 +23,27 @@ public class CoverageTest {
     }
     @Test
     public void testCoverage(){
-        getHashSets.add("fdfs");
+        getHashSets.add("22");
+        getHashSets.add("33");
+        getHashSets.add("44");
         Coverage coverage = new Coverage(getHashSets,2.5);
         assertEquals(getHashSets,coverage.getHashes());
         assertEquals(2.5,coverage.getRatio(),0.001);
+
+        //CoverageLongs Test
+        long[] hashes = new long[]{22,33,44};
+        CoverageLongs coverageLongs = new CoverageLongs(hashes,3,2.5);
+        Coverage coverage_long = new Coverage(coverageLongs);
+        assertEquals(1, coverage_long.getHashLength());
+        assertEquals(coverage.getRatio(), coverage_long.getRatio(),0.01);
+
     }
     @Test
     public void getHashes() {
         getHashSets.add("aaa");
         getHashSets.add("bbb");
         Coverage getHashCoverage = new Coverage(getHashSets,5.5);
-        assertEquals(getHashCoverage.getHashes(),getHashSets);
+        assertEquals(getHashSets,getHashCoverage.getHashes());
     }
 
     @Test

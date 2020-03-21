@@ -25,6 +25,9 @@ public class Base32Test {
 
         String encode_neg = Base32.encodeBase32(-122,4);
         assertEquals("-003u",encode_neg);
+
+        String encode_Base32 = Base32.encodeBase32((long) 32.0);
+        assertEquals("000000000010",encode_Base32);
     }
     @Test
     public void decodeBase32()throws Exception{
