@@ -18,6 +18,7 @@ public class GeoHashTest {
 
     @Test
     public void adjacentHash() {
+
     }
 
     @Test
