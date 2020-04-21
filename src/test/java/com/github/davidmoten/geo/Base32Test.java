@@ -28,9 +28,8 @@ public class Base32Test {
 
         String encode_Base32 = Base32.encodeBase32((long) 32.0);
         assertEquals("000000000010",encode_Base32);
-    }
-    @Test
-    public void encodeBase32_ISP() throws Exception{
+
+        //add ISP
         String encode_pos_0 = Base32.encodeBase32(75324,0);
         assertEquals("29jw",encode_pos_0);
 

@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class GeoHashTest {
@@ -70,6 +71,25 @@ public class GeoHashTest {
 
         adjacentHash = geoHash.adjacentHash("ppp",Direction.RIGHT);
         assertEquals("pr0",adjacentHash);
+
+        //add ISP
+
+        try{
+            adjacentHash = geoHash.adjacentHash(null, direction);
+        }
+        catch (Exception e){
+            //test message
+            assertThat(e.getMessage(), is("hash must be non-null"));
+        }
+        try{
+            adjacentHash = geoHash.adjacentHash("", direction);
+        }
+        catch (Exception e){
+            //test message
+            assertThat(e.getMessage(), is("adjacent has no meaning for a zero length hash that covers the whole world"));
+        }
+
+
     }
 
     @Test
@@ -90,6 +110,11 @@ public class GeoHashTest {
 
     @Test
     public void encodeHash() {
+
+    }
+
+    @Test
+    public void adjacentHashAtBorder(){
 
     }
 

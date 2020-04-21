@@ -32,7 +32,6 @@ public class CoverageLongsTest {
     public void getRatio() {
         CoverageLongs coverageLongsGetRatio = new CoverageLongs(hash, count, 3.0);
         assertEquals(3.0,coverageLongsGetRatio.getRatio(),0.0001);
-
     }
 
     @Test

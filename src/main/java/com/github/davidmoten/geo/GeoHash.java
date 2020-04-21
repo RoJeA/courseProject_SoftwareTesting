@@ -192,7 +192,7 @@ public final class GeoHash {
     }
 
     /**
-     * Throws an {@link IllegalArgumentException} if and only if the hash is
+     *
      * null or blank.
      * 
      * @param hash
