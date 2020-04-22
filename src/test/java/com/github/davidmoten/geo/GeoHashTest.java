@@ -28,11 +28,72 @@ public class GeoHashTest {
 
     @Test
     public void adjacentHash() {
-        String adjacentHash = geoHash.adjacentHash(hash, direction,-1);
-        assertEquals(geoHash.adjacentHash("11w", Direction.BOTTOM, 1), adjacentHash);
+        String adjacentHash = geoHash.adjacentHash(hash, direction,1);
+        assertEquals(geoHash.adjacentHash("11w", Direction.TOP, 1), adjacentHash);
 
         adjacentHash = geoHash.adjacentHash(hash, direction, 5);
         assertEquals("14y", adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("zzz", Direction.TOP,1);
+        assertEquals("gzz",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("145",Direction.BOTTOM,1);
+        assertEquals("11g",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("000",Direction.LEFT,1);
+        assertEquals("pbp",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("ppp",Direction.RIGHT,1);
+        assertEquals("pr0",adjacentHash);
+
+        try{
+            adjacentHash = geoHash.adjacentHash(null, direction,1);
+        }
+        catch (Exception e){
+            //test message
+            assertThat(e.getMessage(), is("hash must be non-null"));
+        }
+        try{
+            adjacentHash = geoHash.adjacentHash("", direction,1);
+        }
+        catch (Exception e){
+            //test message
+            assertThat(e.getMessage(), is("adjacent has no meaning for a zero length hash that covers the whole world"));
+        }
+
+        adjacentHash = geoHash.adjacentHash(hash, direction,-1);
+        assertEquals(geoHash.adjacentHash("11w", Direction.TOP, -1), adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash(hash, direction, -5);
+        assertEquals("10q", adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("zzz", Direction.TOP,-1);
+        assertEquals("zzx",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("145",Direction.BOTTOM,-1);
+        assertEquals("147",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("000",Direction.LEFT,-1);
+        assertEquals("001",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("ppp",Direction.RIGHT,-1);
+        assertEquals("ppn",adjacentHash);
+
+
+        try{
+            adjacentHash = geoHash.adjacentHash(null, direction,-1);
+        }
+        catch (Exception e){
+            //test message
+            assertThat(e.getMessage(), is("hash must be non-null"));
+        }
+        try{
+            adjacentHash = geoHash.adjacentHash("", direction,-1);
+        }
+        catch (Exception e){
+            //test message
+            assertThat(e.getMessage(), is("adjacent has no meaning for a zero length hash that covers the whole world"));
+        }
     }
 
     @Test
@@ -110,13 +171,40 @@ public class GeoHashTest {
 
     @Test
     public void encodeHash() {
+        String encodeHash = geoHash.encodeHash(-50,0,5);
+        assertEquals("hp058", encodeHash);
 
+        try{
+            encodeHash = geoHash.encodeHash(-50,-100,0);
+        }catch (Exception e){
+            assertThat(e.getMessage(), is("length must be greater than zero"));
+        }
+
+        try{
+            encodeHash = geoHash.encodeHash(-100,500,5);
+        }catch (Exception e){
+            assertThat(e.getMessage(), is("latitude must be between -90 and 90 inclusive"));
+        }
+
+        try{
+            encodeHash = geoHash.encodeHash(-100,45,0);
+        }catch (Exception e){
+            assertThat(e.getMessage(), is("length must be greater than zero"));
+        }
+
+        try{
+            encodeHash = geoHash.encodeHash(120,45,3);
+        }catch (Exception e){
+            assertThat(e.getMessage(), is("latitude must be between -90 and 90 inclusive"));
+        }
+
+        try{
+            encodeHash = geoHash.encodeHash(120,45,-5);
+        }catch (Exception e){
+            assertThat(e.getMessage(), is("length must be greater than zero"));
+        }
     }
 
-    @Test
-    public void adjacentHashAtBorder(){
-
-    }
 
     @Test
     public void testEncodeHash() {
