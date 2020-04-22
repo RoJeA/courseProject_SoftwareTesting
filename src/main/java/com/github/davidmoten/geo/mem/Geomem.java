@@ -117,8 +117,7 @@ public class Geomem<T, R> {
      * @return predicate
      */
     @VisibleForTesting
-    Predicate<Info<T, R>> createRegionFilter(final double topLeftLat, final double topLeftLon,
-            final double bottomRightLat, final double bottomRightLon) {
+    Predicate<Info<T, R>> createRegionFilter(final double topLeftLat, final double topLeftLon, final double bottomRightLat, final double bottomRightLon) {
         return new Predicate<Info<T, R>>() {
 
             @Override

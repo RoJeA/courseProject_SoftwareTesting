@@ -30,8 +30,7 @@ public class GeomemTest {
     public void find() {
         Geomem<String, String> g = new Geomem<String, String>();
         g.add(-90, 150, 500, "X", "1");
-        List<Info<String, String>> list = Lists.newArrayList(g.find(topLeftLat,
-                topLeftLong, bottomRightLat, bottomRightLong, 0, 1000));
+        List<Info<String, String>> list = Lists.newArrayList(g.find(topLeftLat, topLeftLong, bottomRightLat, bottomRightLong, 0, 1000));
         assertEquals(1, list.size());
         assertEquals(-90, list.get(0).lat(), PRECISION);
         assertEquals(150, list.get(0).lon(), PRECISION);
