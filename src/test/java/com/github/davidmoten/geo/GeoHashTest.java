@@ -152,6 +152,32 @@ public class GeoHashTest {
 
 
     }
+    @Test
+    public void testAdjacentHashAtBorder(){
+        String adjacentHash = geoHash.adjacentHash("000", Direction.BOTTOM);
+        assertEquals("h00",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("zzz", Direction.TOP);
+        assertEquals("gzz",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("000",Direction.LEFT);
+        assertEquals("pbp",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("rfr",Direction.RIGHT);
+        assertEquals("242",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("11w",Direction.TOP);
+        assertEquals("11y",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("11w",Direction.BOTTOM);
+        assertEquals("11q",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("11w",Direction.LEFT);
+        assertEquals("11t",adjacentHash);
+
+        adjacentHash = geoHash.adjacentHash("11w",Direction.RIGHT);
+        assertEquals("11x",adjacentHash);
+    }
 
     @Test
     public void neighbours() {
@@ -220,6 +246,22 @@ public class GeoHashTest {
 
     @Test
     public void fromLongToString() {
+        try{
+            long li = 0;
+            String si = geoHash.fromLongToString(li);
+            assertTrue(false);
+        }
+        catch (Exception e){
+            assertThat(e.getMessage(), is("invalid long geohash 0"));
+        }
+
+        long l = geoHash.encodeHashToLong(-50,0,3);
+        String s = geoHash.fromLongToString(l);
+        assertEquals("hp0", s);
+
+        long l1 = 1;
+        String s1 = geoHash.fromLongToString(l1);
+        assertEquals("0", s1);
     }
 
     @Test
