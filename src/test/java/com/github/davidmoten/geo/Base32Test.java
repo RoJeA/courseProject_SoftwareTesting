@@ -26,10 +26,15 @@ public class Base32Test {
         String encode_neg = Base32.encodeBase32(-122,4);
         assertEquals("-003u",encode_neg);
 
+        String encode_iLessThan32 = Base32.encodeBase32(5,0);
+        assertEquals("5",encode_iLessThan32);
+
+        String encode_iMoreThanNeg32 = Base32.encodeBase32(-5,0);
+        assertEquals("-5",encode_iMoreThanNeg32);
+
         String encode_Base32 = Base32.encodeBase32((long) 32.0);
         assertEquals("000000000010",encode_Base32);
 
-        //add ISP
         String encode_pos_0 = Base32.encodeBase32(75324,0);
         assertEquals("29jw",encode_pos_0);
 
@@ -64,6 +69,12 @@ public class Base32Test {
 
         long decode_neg = Base32.decodeBase32("-j");
         assertEquals(-17,decode_neg);
+
+        long decode_negNull = Base32.decodeBase32("-");
+        assertEquals(-0,decode_negNull);
+
+        long decode_posNull = Base32.decodeBase32("");
+        assertEquals(0,decode_posNull);
     }
 
     @Test
