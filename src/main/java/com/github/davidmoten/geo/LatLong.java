@@ -42,12 +42,14 @@ public class LatLong {
      * Returns a new {@link LatLong} object with lat, lon increased by deltaLat,
      * deltaLon.
      * 
+     *
+     * @param lat
      * @param deltaLat change in latitude
      * @param deltaLon change in longitude
      * @return latitude and longitude
      */
-    public LatLong add(double deltaLat, double deltaLon) {
-        return new LatLong(lat + deltaLat, lon + deltaLon);
+    public LatLong add(double lat, double deltaLat, double deltaLon) {
+        return new LatLong(this.lat + deltaLat, lon + deltaLon);
     }
 
     @Override

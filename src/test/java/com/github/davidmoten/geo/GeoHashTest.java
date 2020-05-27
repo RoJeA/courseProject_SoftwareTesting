@@ -5,7 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -325,6 +327,9 @@ public class GeoHashTest {
 
     @Test
     public void gridAsString() {
+        Set<String> emptySet = new HashSet<String>();
+        String s = GeoHash.gridAsString("www",12,12,12,12,emptySet);
+        assertEquals("x5d \n",s);
     }
 
     @Test
