@@ -266,6 +266,14 @@ public class GeoHashTest {
 
     @Test
     public void encodeHashToLong() {
+        long l = geoHash.encodeHashToLong(0,0,0);
+        assertEquals(0,l);
+
+        l = geoHash.encodeHashToLong(55,55,5);
+        assertEquals(-2846829668114366459L, l);
+
+        l = geoHash.encodeHashToLong(55,-55,5);
+        assertEquals(8274428630898049029L,l);
     }
 
     @Test
@@ -274,6 +282,17 @@ public class GeoHashTest {
 
     @Test
     public void hashLengthToCoverBoundingBox() {
+        int lengthOfHash = geoHash.hashLengthToCoverBoundingBox(25,25,25,25);
+        assertEquals(12,lengthOfHash);
+
+        lengthOfHash = geoHash.hashLengthToCoverBoundingBox(25,-25,25,25);
+        assertEquals(0,lengthOfHash);
+
+        lengthOfHash = geoHash.hashLengthToCoverBoundingBox(25,25,25,-25);
+        assertEquals(0,lengthOfHash);
+
+        lengthOfHash = geoHash.hashLengthToCoverBoundingBox(25,-25,25,-25);
+        assertEquals(12,lengthOfHash);
     }
 
     @Test
